@@ -12,13 +12,22 @@ public class Enemy : MonoBehaviour {
     public LayerMask whatIsWall;
     private bool hittingWall;
 
+
 	// Use this for initialization
 	void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+            GetComponent<SpriteRenderer>().enabled = false;
+        }
+    }
+    // Update is called once per frame
+    void Update () {
 
         hittingWall = Physics2D.OverlapCircle(wallCheck.position, wallCheckRadius, whatIsWall);
 
